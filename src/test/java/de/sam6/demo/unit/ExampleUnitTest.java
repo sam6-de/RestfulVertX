@@ -1,7 +1,10 @@
 package de.sam6.demo.unit;
 
 import de.sam6.demo.PingVerticle;
+import junit.framework.Assert;
 import org.junit.Test;
+
+import static junit.framework.Assert.*;
 
 /*
  * Copyright 2013 Red Hat, Inc.
@@ -22,10 +25,11 @@ import org.junit.Test;
  */
 public class ExampleUnitTest {
 
-  @Test
-  public void testVerticle() {
-    PingVerticle vert = new PingVerticle();
+    @Test
+    public void testVerticle() {
+        PingVerticle vert = new PingVerticle();
 
-    // do something with verticle
-  }
+        assertNotNull(vert);
+        // do something with verticle
+    }
 }

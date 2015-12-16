@@ -1,6 +1,6 @@
 # Vert.x Example Maven Project
 
-Example project for creating a Vert.x module with a Gradle build.
+Example project for creating a Vert.x module with a Maven build.
 
 By default this module contains a simple Java verticle which listens on the event bus and responds to `ping!`
 messages with `pong!`.

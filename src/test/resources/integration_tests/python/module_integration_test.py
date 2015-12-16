@@ -25,7 +25,7 @@ def test_something_else() :
 script = locals()
 
 # The script is execute for each test, so this will deploy the module for each one
-def handler(err, depID):
+def handler(err, depid):
     # Deployment is asynchronous and this this handler will be called when it's complete (or failed)
     VertxAssert.assertNull(err)
     # If deployed correctly then start the tests!

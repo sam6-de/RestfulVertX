@@ -1,5 +1,5 @@
 package de.sam6.demo;
-/*
+/**
  * Copyright 2013 Red Hat, Inc.
  *
  * Red Hat licenses this file to you under the Apache License, version 2.0
@@ -19,25 +19,41 @@ package de.sam6.demo;
 
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.eventbus.Message;
+import org.vertx.java.core.http.HttpServerRequest;
 import org.vertx.java.platform.Verticle;
 
-/*
-This is a simple Java verticle which receives `ping` messages on the event bus and sends back `pong` replies
+/**
+ * This is a simple Java verticle which receives `ping`
+ * messages on the event bus and sends back `pong` replies.
  */
 public class PingVerticle extends Verticle {
 
-  public void start() {
+    /**
+     * Listening port.
+     */
+    public static final int LISTEN_PORT = 8888;
 
+    /**
+     * Start method.
+     */
+    public final void start() {
 
-    vertx.eventBus().registerHandler("ping-address", new Handler<Message<String>>() {
-      @Override
-      public void handle(Message<String> message) {
-        message.reply("pong!");
-        container.logger().info("Sent back pong");
-      }
-    });
+        vertx.eventBus().registerHandler("ping-address",
+                new Handler<Message<String>>() {
+            @Override
+            public void handle(final Message<String> message) {
+                message.reply("pong!");
+                container.logger().info("Sent back pong");
+            }
+        });
 
-    container.logger().info("PingVerticle started");
-
-  }
+        vertx.createHttpServer().requestHandler(
+                new Handler<HttpServerRequest>() {
+            @Override
+            public void handle(final HttpServerRequest httpServerRequest) {
+                httpServerRequest.response().end("Hello world");
+            }
+        }).listen(LISTEN_PORT);
+        container.logger().info("Webservice started, listening on port: 8888");
+    }
 }
